@@ -80,8 +80,10 @@ class Eye:
         )
         self.img = cv2.cvtColor(np.array(self.img), cv2.COLOR_RGB2GRAY)
         # 缩放成原来的1/2
+        height = self.config.conf.eye.final_height
         self.img = cv2.resize(
             self.img,
-            (self.img.shape[1] // 2, self.img.shape[0] // 2),
+            (height * self.img.shape[1] // self.img.shape[0], height),
             interpolation=cv2.INTER_AREA,
         )
+        # print(self.img.shape)

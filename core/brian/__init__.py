@@ -14,6 +14,7 @@ import numpy as np
 import pytesseract
 
 from config import Config
+from .gcd import get_gcd
 
 pytesseract.pytesseract.tesseract_cmd = "D:/install/ocr/tesseract.exe"
 
@@ -31,15 +32,21 @@ class Brain:
     def __init__(self, config: Config) -> None:
         self.config: Config = config
         self.img: np.ndarray = None
-        self.question: str = None
+        self.question_str: str = None
+        self.answer: str = None
 
     def get_img(self, img: np.ndarray) -> None:
         self.img = img
         _, self.img = cv2.threshold(self.img, 150, 255, cv2.THRESH_BINARY)
 
     def get_question(self) -> None:
-        self.question = pytesseract.image_to_string(
+        self.question_str = pytesseract.image_to_string(
             self.img,
             lang=self.config.conf.brain.lang,
             config=self.config.conf.brain.ocr_config,
         )
+        self.question_str = self.question_str.split("\n")[0]
+
+    def compute(self) -> None:
+        if self.config.args_conf.type == "gcd":
+            self.answer = get_gcd(self.question_str)
