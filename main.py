@@ -13,6 +13,7 @@ import time
 from config import Config
 from core.eye import Eye
 from core.brian import Brain
+from core.hand import Hand
 import cv2
 
 if __name__ == "__main__":
@@ -23,6 +24,8 @@ if __name__ == "__main__":
     config = Config(args)
     eye = Eye(config)
     brain = Brain(config)
+    hand = Hand(config)
+    curr_answer = None
     while True:
         eye.get_screen()
         eye.find_window()
@@ -34,4 +37,17 @@ if __name__ == "__main__":
         print(brain.question_str, brain.answer)
         # time.sleep(0.05)
         # 保存图像
-        cv2.imwrite("question.png", brain.img)
+        # cv2.imwrite("question.png", brain.img)
+        # 和上一个answer一样才写
+        if curr_answer != brain.answer:
+            curr_answer = brain.answer
+        else:
+            if curr_answer is None:
+                continue
+            # 开始写字
+            x = eye.left + (eye.right - eye.left) // 4
+            y = (eye.top + eye.bottom) // 2
+            hand.moveto(x, y)
+            hand.get_answer(curr_answer)
+            hand.write()
+            time.sleep(0.1)

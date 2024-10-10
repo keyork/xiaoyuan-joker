@@ -21,10 +21,13 @@ def get_gcd(question: str) -> int:
     """
     # 从问题中提取数字
     try:
-        num1, num2 = map(int, question[1:-3].split(","))
-        # print(num1, num2)
+        if question[-1] == "?":
+            num1, num2 = map(int, question[1:-3].split(","))
+        else:
+            num1, num2 = map(int, question[1:-2].split(","))
+        print(num1, num2)
     except:
         return None
     while num2 != 0:
         num1, num2 = num2, num1 % num2
-    return num1
+    return str(num1)
