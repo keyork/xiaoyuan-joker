@@ -1,0 +1,10 @@
+window_name: "MUMU模拟器12"
+eye:
+  top: 0.29
+  bottom: 0.63
+  left: 0.1
+  right: 0.1
+brain:
+  ocr_config: "--psm 6 --oem 3 -c tessedit_char_whitelist=?=+-x÷.%0123456789"
+  # ocr_config: "--psm 7 --oem 3"
+  lang: "eng"
