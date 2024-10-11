@@ -55,8 +55,8 @@ class Brain:
             self.img,
             decoder="beamsearch",
             beamWidth=50,
-            batch_size=4,
-            allowlist="?=÷+-x.%0123456789(),[]",
+            batch_size=8,
+            allowlist="?=+-x.%0123456789(),[]",
             paragraph=True,
             detail=0,
         )

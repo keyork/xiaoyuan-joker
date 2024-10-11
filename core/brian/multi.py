@@ -21,11 +21,16 @@ def get_multi(question: str) -> int:
     """
     # 从问题中提取数字
     try:
-        if question[-1] == "?":
-            num1, num2 = map(int, question[0:-2].split("x"))
-        else:
-            num1, num2 = map(int, question[0:-1].split("x"))
+        question = question.split("=")[0]
+        num1, num2 = map(float, question.split("x"))
         print(num1, num2)
     except:
         return None
-    return str(num1 * num2)
+    result = num1 * num2
+    # 处理精度问题
+    # 只留存小数点后两位
+    result = round(result, 5)
+    # 如果是整数，返回整数
+    if result.is_integer():
+        return str(int(result))
+    return str(result)

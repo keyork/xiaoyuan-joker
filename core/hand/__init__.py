@@ -34,7 +34,8 @@ class Hand:
             self.action.draw_method(self.answer[idx])
             for act in self.action.action:
                 self.action.action_map(act)
-            self.action.go_right()
+            if idx != len(self.answer) - 1:
+                self.action.go_right()
 
     def moveto(self, x: int, y: int) -> None:
         self.action.moveto(x, y)

@@ -19,7 +19,7 @@ import cv2
 if __name__ == "__main__":
     args = argparse.ArgumentParser()
     args.add_argument("--config", type=str, default="etc/config.yaml")
-    args.add_argument("--type", "-t", type=str, default="比大小")
+    args.add_argument("--type", "-t", type=str, default="gcd")
     args = args.parse_args()
     config = Config(args)
     eye = Eye(config)
@@ -38,7 +38,7 @@ if __name__ == "__main__":
         print(brain.question_str, brain.answer)
         # time.sleep(0.05)
         # 保存图像
-        # cv2.imwrite("question.png", brain.img)
+        cv2.imwrite("question.png", brain.img)
         # 和上一个answer一样才写
         if curr_answer != brain.answer:
             curr_answer = brain.answer

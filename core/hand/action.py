@@ -85,7 +85,7 @@ class Action:
             self.action = [
                 "d",
                 "5 0",
-                "-5 10",
+                "-5 15",
                 "u",
             ]
         elif char == "8":
@@ -147,6 +147,7 @@ class Action:
             self.action = [
                 "5 10",
                 "d",
+                "0 1",
                 "u",
             ]
 
@@ -164,7 +165,7 @@ class Action:
     def go_right(self) -> None:
         self.char_idx += 1
         pyautogui.moveTo(self.init_x + self.char_idx * 100, self.init_y)
-        # time.sleep(0.01)
+        time.sleep(0.01)
 
     def moveto(self, x, y):
         pyautogui.moveTo(x, y)
