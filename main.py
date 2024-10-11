@@ -38,7 +38,7 @@ if __name__ == "__main__":
         print(brain.question_str, brain.answer)
         # time.sleep(0.05)
         # 保存图像
-        cv2.imwrite("question.png", brain.img)
+        # cv2.imwrite("question.png", brain.img)
         # 和上一个answer一样才写
         if curr_answer != brain.answer:
             curr_answer = brain.answer
@@ -47,7 +47,7 @@ if __name__ == "__main__":
             if curr_answer is None:
                 continue
             # 开始写字
-            x = eye.left + (eye.right - eye.left) // 4
+            x = eye.left + (eye.right - eye.left) // 10
             y = (eye.top + eye.bottom) // 2
             hand.moveto(x, y)
             hand.get_answer(curr_answer)

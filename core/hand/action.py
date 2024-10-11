@@ -57,7 +57,7 @@ class Action:
                 "0 5",
                 "5 0",
                 "0 -5",
-                "0 10",
+                "0 15",
                 "u",
             ]
         elif char == "5":
@@ -143,6 +143,12 @@ class Action:
                 "5 5",
                 "u",
             ]
+        elif char == ".":
+            self.action = [
+                "5 10",
+                "d",
+                "u",
+            ]
 
     def action_map(self, action: str) -> None:
         if len(action) == 1:
@@ -158,7 +164,7 @@ class Action:
     def go_right(self) -> None:
         self.char_idx += 1
         pyautogui.moveTo(self.init_x + self.char_idx * 100, self.init_y)
-        time.sleep(0.01)
+        # time.sleep(0.01)
 
     def moveto(self, x, y):
         pyautogui.moveTo(x, y)

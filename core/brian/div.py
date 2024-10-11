@@ -21,12 +21,20 @@ def get_div(question: str) -> int:
     """
     # 从问题中提取数字
     try:
+        question.replace("+", "?")
         question = question.split("=")[0]
         if "?" in question:
-            num1, num2 = map(int, question.split("?"))
+            num1, num2 = map(float, question.split("?"))
         else:
-            num1, num2 = map(int, question.split("÷"))
+            num1, num2 = map(float, question.split("÷"))
         print(num1, num2)
     except:
         return None
-    return str(num1 // num2)
+    result = num1 / num2
+    # 处理精度问题
+    # 只留存小数点后两位
+    result = round(result, 2)
+    # 如果是整数，返回整数
+    if result.is_integer():
+        return str(int(result))
+    return str(result)
