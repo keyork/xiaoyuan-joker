@@ -20,19 +20,20 @@ class Action:
 
     def __init__(self) -> None:
         self.action = None
+        self.init_x = 0
+        self.init_y = 0
+        self.char_idx = 0
 
     def draw_method(self, char: str) -> None:
         if char == "1":
             # 绘制1
             self.action = [
-                "0 0",
                 "d",
-                "-2 10",
+                "2 10",
                 "u",
             ]
         elif char == "2":
             self.action = [
-                "0 0",
                 "d",
                 "5 0",
                 "0 5",
@@ -42,17 +43,16 @@ class Action:
             ]
         elif char == "3":
             self.action = [
-                "0 0",
                 "d",
                 "5 0",
                 "-5 5",
                 "5 0",
-                "-5 5",
+                "0 5",
+                "-5 0",
                 "u",
             ]
         elif char == "4":
             self.action = [
-                "0 0",
                 "d",
                 "0 5",
                 "5 0",
@@ -62,7 +62,7 @@ class Action:
             ]
         elif char == "5":
             self.action = [
-                "0 0",
+                "5 0",
                 "d",
                 "-5 0",
                 "0 5",
@@ -73,26 +73,24 @@ class Action:
             ]
         elif char == "6":
             self.action = [
-                "0 0",
+                "5 0",
                 "d",
-                "-5 0",
-                "0 10",
+                "-5 10",
                 "5 0",
                 "0 -5",
-                "-5 0",
+                "-9 0",
                 "u",
             ]
         elif char == "7":
             self.action = [
-                "0 0",
                 "d",
                 "5 0",
-                "0 10",
+                "-5 10",
                 "u",
             ]
         elif char == "8":
             self.action = [
-                "0 0",
+                "5 5",
                 "d",
                 "-5 -5",
                 "10 0",
@@ -103,7 +101,7 @@ class Action:
             ]
         elif char == "9":
             self.action = [
-                "0 0",
+                "5 0",
                 "d",
                 "-5 0",
                 "0 -5",
@@ -114,7 +112,6 @@ class Action:
             ]
         elif char == "0":
             self.action = [
-                "0 0",
                 "d",
                 "5 0",
                 "0 10",
@@ -124,7 +121,6 @@ class Action:
             ]
         elif char == "<":
             self.action = [
-                "0 0",
                 "d",
                 "-5 5",
                 "0 10",
@@ -132,7 +128,6 @@ class Action:
             ]
         elif char == ">":
             self.action = [
-                "0 0",
                 "d",
                 "5 5",
                 "0 10",
@@ -140,7 +135,6 @@ class Action:
             ]
         elif char == "=":
             self.action = [
-                "0 0",
                 "d",
                 "5 0",
                 "u",
@@ -158,12 +152,16 @@ class Action:
                 pyautogui.mouseDown()
         else:
             x, y = map(int, action.split())
-            pyautogui.move(x * 10, y * 10)
+            pyautogui.move(x * 9, y * 9)
         time.sleep(0.01)
 
     def go_right(self) -> None:
-        pyautogui.move(12 * 10, -10 * 10)
+        self.char_idx += 1
+        pyautogui.moveTo(self.init_x + self.char_idx * 100, self.init_y)
         time.sleep(0.01)
 
     def moveto(self, x, y):
         pyautogui.moveTo(x, y)
+        self.init_x = x
+        self.init_y = y
+        self.char_idx = 0

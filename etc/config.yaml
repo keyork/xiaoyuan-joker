@@ -6,6 +6,6 @@ eye:
   right: 0.1
   final_height: 90
 brain:
-  ocr_config: "--psm 6 --oem 3 -c tessedit_char_whitelist=?=+-x÷.%0123456789(),"
+  ocr_config: "--psm 7 --oem 3 -c tessedit_char_whitelist=?=÷+-x.%0123456789(),[]"
   # ocr_config: "--psm 7 --oem 3"
   lang: "eng"

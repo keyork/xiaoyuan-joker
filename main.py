@@ -26,9 +26,10 @@ if __name__ == "__main__":
     brain = Brain(config)
     hand = Hand(config)
     curr_answer = None
+    eye.get_screen()
+    eye.find_window()
     while True:
-        eye.get_screen()
-        eye.find_window()
+        start = time.time()
         eye.get_curr_question()
         brain.get_img(eye.img)
         brain.get_question()
@@ -37,10 +38,11 @@ if __name__ == "__main__":
         print(brain.question_str, brain.answer)
         # time.sleep(0.05)
         # 保存图像
-        # cv2.imwrite("question.png", brain.img)
+        cv2.imwrite("question.png", brain.img)
         # 和上一个answer一样才写
         if curr_answer != brain.answer:
             curr_answer = brain.answer
+            continue
         else:
             if curr_answer is None:
                 continue
@@ -50,4 +52,4 @@ if __name__ == "__main__":
             hand.moveto(x, y)
             hand.get_answer(curr_answer)
             hand.write()
-            time.sleep(0.1)
+            time.sleep(0.3)
